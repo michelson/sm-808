@@ -42,7 +42,7 @@ module Sm808
 
       process_step_data step_data
 
-      sleep ((Clock.delay)*4)/steps_length
+      sleep ((Clock.delay)*4)/8
 
       tick
     end
