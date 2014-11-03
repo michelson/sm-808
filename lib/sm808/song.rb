@@ -20,7 +20,7 @@ module Sm808
 
     def play
       @current_step = 1
-      tick()
+      tick
     end
 
     def tick
