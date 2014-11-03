@@ -2,7 +2,6 @@ module Sm808
   class Pattern
 
     attr_accessor :grid, :instrument
-    attr_reader :current_step_index
 
     def initialize( opts={})
       @steps = []
@@ -22,7 +21,7 @@ module Sm808
 
     def build_steps
       @grid.each do |step|
-        @steps << Step.new(active: step.to_b? )
+        @steps << Step.new(active: !step.zero? )
       end
     end
 
