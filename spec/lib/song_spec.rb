@@ -20,7 +20,7 @@ describe "Song" do
       #song <- HiHat  |_|_|X|_|_|_|X|_|
       @song.add_pattern([1,0,0,0,1,0,0,0], "Kick")
       @song.add_pattern([0,0,0,0,1,0,0,0], "Snare")
-      @song.add_pattern([0,0,1,0,0,0,1,0], "HiHat")
+      @song.add_pattern([0,0,1,0,0,0,1,0], "Hi-Hat")
     end
 
     it "should return the pattern length" do

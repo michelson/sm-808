@@ -33,24 +33,18 @@ module Sm808
       @patterns.each do |pat|
         Thread.new do
           @lock.synchronize {
-          step_data << { instrument: pat.instrument, step: pat.steps[@current_step-1] }
-        }
+            step = pat.next_step
+            pat.instrument.play if step.on?
+            step_data << { instrument: pat.instrument, step: step }
+          }
         end.join()
       end
 
       process_step_data step_data
 
-      sleep Clock.delay
-      @current_step == steps_length ? reset_steps : increment_steps
+      sleep ((Clock.delay)*4)/steps_length
+
       tick
-    end
-
-    def reset_steps
-      @current_step = 1
-    end
-
-    def increment_steps
-      @current_step += 1
     end
 
     def stop

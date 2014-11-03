@@ -18,4 +18,13 @@ describe "Pattern" do
     expect( pattern.steps[2] ).to be_off
   end
 
+  it "next step should return first step when " do
+    first_step = pattern.steps.first
+    last_step = nil
+    9.times do
+      last_step = pattern.next_step
+    end
+    expect(first_step).to be == last_step
+  end
+
 end

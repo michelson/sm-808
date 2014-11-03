@@ -7,10 +7,6 @@ module Sm808
       @active = opts[:active] ||= false
     end
 
-    def sound!
-      true if on?
-    end
-
     def on?
       @active
     end
