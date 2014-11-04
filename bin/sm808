@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+#require 'sm808'
+require './lib/sm808.rb'
+
+Sm808::CLI.start

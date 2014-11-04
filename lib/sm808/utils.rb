@@ -34,7 +34,7 @@ module Sm808
     end
 
     def sound_file(name)
-      location.to_s +  "/lib/sounds/#{name}.wav"
+      Sm808.lib + "/sounds/#{name}.wav"
     end
 
     def location

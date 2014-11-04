@@ -4,8 +4,8 @@ module Sm808
     attr_accessor :grid, :instrument
 
     def initialize( opts={})
-      @steps = []
-      @grid = opts[:grid] ||= []
+      @steps      = []
+      @grid       = opts[:grid] ||= []
 
       if opts[:instrument]
         sound_name = opts[:instrument].downcase
@@ -13,6 +13,7 @@ module Sm808
       end
 
       self.build_steps unless @grid.empty?
+      self
     end
 
     def steps

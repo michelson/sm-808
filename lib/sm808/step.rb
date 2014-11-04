@@ -3,7 +3,7 @@ module Sm808
 
     attr_accessor :active
 
-    def initialize(opts={})
+    def initialize(opts = {})
       @active = opts[:active] ||= false
     end
 

@@ -13,6 +13,7 @@ module Sm808
     end
 
     def play
+      #LOGGER.info "play #{self.class.sound_file(@sound)}"
       self.class.play_sound(@sound)
     end
 
