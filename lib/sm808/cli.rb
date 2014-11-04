@@ -62,13 +62,6 @@ module Sm808
       end
     }
 
-    map %w(a) => 'add'
-    desc "song ", "Create Song interactively"
-    def song()
-      init_application
-      add_song
-    end
-
     map %w(s) => 'server'
     desc "start", "run Sm808 app"
     def start
@@ -94,6 +87,13 @@ module Sm808
       @app.quit
     end
 
+    map %w(a) => 'add'
+    desc "song ", "Create Song interactively"
+    def song()
+      init_application
+      add_song
+    end
+
     desc "hello", "say hello"
     def hello
       init_application
@@ -116,6 +116,18 @@ module Sm808
     def stop
       init_application
       send_to_daemon("stop")
+    end
+
+    desc "tempo", "set tempo"
+    def tempo(bpm)
+      init_application
+      send_to_daemon("tempo", bpm)
+    end
+
+    desc "add", "add track"
+    def add
+      init_application
+      add_track
     end
 
   end

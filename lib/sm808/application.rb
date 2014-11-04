@@ -25,7 +25,7 @@ module Sm808
         ::Process.setpgid(0, 0)
       rescue Errno::EPERM
       end
-      puts "STARTING SM-808 SERVER"
+      puts "Starting SM-808 server with pid #{get_pid}"
       daemonize unless foreground?
 
       $0 = "Sm808: #{self.name}"
@@ -54,10 +54,10 @@ module Sm808
 
     def cleanup
       begin
-        #delete_if_exists(self.socket.path) if self.socket
+        delete_if_exists(self.socket.path) if self.socket
       rescue IOError
       end
-      #delete_if_exists(self.pid_file)
+      delete_if_exists(self.pid_file)
     end
 
     def foreground?
@@ -165,9 +165,9 @@ module Sm808
       pid = get_pid
       if self.pid_alive?(pid)
         Process.kill("TERM", pid)
-        puts "QUIT SM808 WHIT PID [#{pid}]"
+        puts "Quit SM-808 with Pid [#{pid}]"
       else
-        puts "SMS808[#{pid}] not running"
+        puts "SMS-808[#{pid}] not running"
       end
     end
 
@@ -189,11 +189,15 @@ module Sm808
       @song.info
     end
 
+    def tempo(bpm)
+      @song.tempo bpm
+    end
+
     def play
       @playing_thread = Thread.new do
         @song.play
       end
-      "STARTING SONG!"
+      "Starting Song!"
     end
 
     def stop
@@ -244,7 +248,6 @@ protected
 
     def delete_if_exists(filename)
       tries = 0
-
       begin
         File.unlink(filename) if filename && File.exists?(filename)
       rescue IOError, Errno::ENOENT

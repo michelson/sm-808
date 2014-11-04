@@ -66,6 +66,11 @@ module Sm808
       $stdout.flush
     end
 
+    def tempo(bpm)
+      @bpm = bpm.to_f
+      Clock.tempo = @bpm
+    end
+
     def info
       self.inspect
     end

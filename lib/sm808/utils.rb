@@ -31,6 +31,7 @@ module Sm808
       else
         raise "not implemented play sound for your operative system"
       end
+      Process.detach(pid) if pid
     end
 
     def sound_file(name)
