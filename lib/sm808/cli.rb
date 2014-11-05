@@ -34,9 +34,9 @@ module Sm808
 
       def add_song
 
-        title = ask("Tune name:")
+        title = ask("Tune name:", :green)
 
-        bpm = ask("Set tempo (BPM)").to_i
+        bpm = ask("Set tempo (BPM)", :green).to_i
 
         send_to_daemon("create_song", title, bpm)
 
@@ -47,16 +47,16 @@ module Sm808
       def add_track
         puts available_instruments.each_with_index.map{|name, index| "[#{index}] #{name}"}
         puts ">> Choose instrument <<"
-        inst = ask("which instrument you want to use?").to_i
+        inst = ask("which instrument you want to use?", :green).to_i
         if available_instruments.each_with_index.map{|o, i| i}.include?(inst)
           instrument = available_instruments.each_with_index.find{|o, i| i == inst }[0]
         end
 
-        pattern = ask("set the pattern, like [1,0,0,1]")
+        pattern = ask("set the pattern, like [1,0,0,1]", :green)
 
         send_to_daemon("add_tracks", instrument, pattern)
 
-        another = yes?("Would you like to add another instrument (Y/N)?")
+        another = yes?("Would you like to add another instrument (Y/N)?", :green)
 
         add_track if another
       end
