@@ -1,17 +1,19 @@
 module Sm808
   class Song
 
-    attr_accessor :patterns, :title, :bpm, :pattern_length
+    attr_accessor :patterns, :title, :bpm
+    attr_accessor :pattern_length, :current_step
 
     def initialize(opts={})
-      @title = opts[:title]
-      @bpm =  opts[:bpm] ||= 60
-      @patterns = []
+      @title      = opts[:title]
+      @bpm        = opts[:bpm] ||= 60
+      @patterns   = []
       Clock.tempo = @bpm.to_f
+      LOGGER.info "CREATING SONG #{@title} at #{@bpm} BPM"
     end
 
     def add_pattern(grid, name)
-      @patterns << Pattern.new(grid: grid , instrument: name)
+      @patterns << Pattern.new(grid: grid , instrument: name )
     end
 
     def steps_length
@@ -19,7 +21,7 @@ module Sm808
     end
 
     def play
-      @current_step = 1
+      self.current_step = 1
       tick
     end
 
@@ -36,6 +38,7 @@ module Sm808
             step = pat.next_step
             pat.instrument.play if step.on?
             step_data << { instrument: pat.instrument, step: step }
+            LOGGER.info "STEP: #{pat.instrument.name}, #{step.on?}"
           }
         end.join()
       end
@@ -61,6 +64,15 @@ module Sm808
     def print_and_flush(str)
       print str
       $stdout.flush
+    end
+
+    def tempo(bpm)
+      @bpm = bpm.to_f
+      Clock.tempo = @bpm
+    end
+
+    def info
+      self.inspect
     end
 
   end

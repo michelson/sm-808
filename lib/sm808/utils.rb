@@ -31,10 +31,11 @@ module Sm808
       else
         raise "not implemented play sound for your operative system"
       end
+      Process.detach(pid) if pid
     end
 
     def sound_file(name)
-      location.to_s +  "/lib/sounds/#{name}.wav"
+      Sm808.lib + "/sounds/#{name}.wav"
     end
 
     def location
